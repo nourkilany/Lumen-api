@@ -5,7 +5,6 @@ use Laravel\Lumen\Testing\DatabaseTransactions;
 
 abstract class TestCase extends Laravel\Lumen\Testing\TestCase
 {
-    use DatabaseMigrations, DatabaseTransactions;
     /**
      * Creates the application.
      *
