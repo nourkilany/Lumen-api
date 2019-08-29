@@ -25,6 +25,7 @@ $app->withFacades(true, ['Spatie\Fractal\FractalFacade' => 'Fractal']);
 
 $app->withEloquent();
 
+$app->configure('swagger-lume');
 /*
 |--------------------------------------------------------------------------
 | Register Container Bindings
@@ -76,6 +77,7 @@ $app->singleton(
 |
 */
 $app->register(Spatie\Fractal\FractalServiceProvider::class);
+$app->register(\SwaggerLume\ServiceProvider::class);
 // $app->register(App\Providers\AppServiceProvider::class);
 // $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
