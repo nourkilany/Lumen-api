@@ -1,0 +1,90 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "blog Api",
+        "contact": {
+            "name": "Back-end Team",
+            "email": "nour.kilany@ibtikar.net.sa"
+        },
+        "version": "1.0"
+    },
+    "paths": {
+        "/api/v1/authors": {
+            "get": {
+                "summary": "Get authors",
+                "operationId": "getAuthors",
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "operationId": "App\\Http\\Controllers\\AuthorController::create",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Author's name",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Author object that needs to be added authors",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Creates an author",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/authors/{id}": {
+            "get": {
+                "summary": "Get single authors",
+                "operationId": "getSingleAuthor",
+                "parameters": [
+                    {
+                        "name": "authorId",
+                        "in": "path",
+                        "description": "ID of author to return",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Returns a specific author's data",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

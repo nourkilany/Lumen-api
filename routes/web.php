@@ -17,5 +17,5 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
     $router->get('authors/{author}',   ['uses' => 'AuthorController@show',    'as' => 'author.show']);
     $router->post('authors',           ['uses' => 'AuthorController@store',   'as' => 'author.store']);
     $router->put('authors/{id}',       ['uses' => 'AuthorController@update',  'as' => 'author.update']);
-    $router->delete('authors/{id}',    ['uses' => 'AuthorController@delete',  'as' => 'author.delete']);
+    $router->delete('authors/{id}',    ['uses' => 'AuthorController@destroy',  'as' => 'author.destroy']);
 });
