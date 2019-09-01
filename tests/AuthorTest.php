@@ -1,8 +1,5 @@
 <?php
 
-use Laravel\Lumen\Testing\DatabaseMigrations;
-use Laravel\Lumen\Testing\DatabaseTransactions;
-
 class AuthorTest extends TestCase
 {
     /**
@@ -10,7 +7,8 @@ class AuthorTest extends TestCase
      */
     public function testShouldReturnAllAuthors()
     {
-        $authors = factory(App\Author::class, 10)->create();
+        factory(App\Author::class, 10)->create();
+
         $this
             ->get('api/v1/authors')
             ->seeStatusCode(200)
