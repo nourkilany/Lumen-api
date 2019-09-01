@@ -18,4 +18,11 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
     $router->post('authors',           ['uses' => 'AuthorController@store',   'as' => 'author.store']);
     $router->put('authors/{id}',       ['uses' => 'AuthorController@update',  'as' => 'author.update']);
     $router->delete('authors/{id}',    ['uses' => 'AuthorController@destroy',  'as' => 'author.destroy']);
+
+    // Article Routes
+    $router->get('articles',           ['uses' => 'ArticleController@index',   'as' => 'article.index']);
+    $router->get('articles/{article}', ['uses' => 'ArticleController@show',    'as' => 'article.show']);
+    $router->post('articles',          ['uses' => 'ArticleController@store',   'as' => 'article.store']);
+    $router->put('articles/{id}',      ['uses' => 'ArticleController@update',  'as' => 'article.update']);
+    $router->delete('articles/{id}',   ['uses' => 'ArticleController@destroy', 'as' => 'article.destroy']);
 });

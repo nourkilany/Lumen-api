@@ -27,3 +27,13 @@ $factory->define(App\Author::class, function (Faker\Generator $faker) {
         'location' => $faker->address
     ];
 });
+
+$factory->define(App\Article::class, function (Faker\Generator $faker) {
+    return [
+        'subject'           => $faker->sentence(6),
+        'secondary_title'   => $faker->sentence(3),
+        'body'              => $faker->text,
+        'image'             => $faker->image,
+        'author_id'         => factory(App\Author::class)->create()->id
+    ];
+});
