@@ -24,6 +24,7 @@ $factory->define(App\Author::class, function (Faker\Generator $faker) {
         'email' => $faker->email,
         'github' => $faker->email,
         'twitter' => $faker->email,
+        'password' => $faker->password,
         'location' => $faker->address
     ];
 });

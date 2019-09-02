@@ -9,6 +9,8 @@ class ArticleTest extends TestCase
      */
     public function testShouldReturnAllArticles()
     {
+        $this->actingAs(factory(App\Author::class)->create(), 'api');
+
         factory(App\Article::class, 2)->create();
 
         $this
@@ -31,6 +33,8 @@ class ArticleTest extends TestCase
      */
     public function testShouldReturnArticle()
     {
+        $this->actingAs(factory(App\Author::class)->create(), 'api');
+
         $article = factory(App\Article::class)->create();
         $this
             ->get("api/v1/articles/{$article->id}")
@@ -53,6 +57,8 @@ class ArticleTest extends TestCase
      */
     public function testShouldCreateArticle()
     {
+        $this->actingAs(factory(App\Author::class)->create(), 'api');
+
         factory(App\Author::class)->create();
 
         $body = [
@@ -71,6 +77,8 @@ class ArticleTest extends TestCase
 
     public function testShouldUpdateArticle()
     {
+        $this->actingAs(factory(App\Author::class)->create(), 'api');
+
         $article = factory(App\Article::class)->create();
 
         $body = [
@@ -88,6 +96,8 @@ class ArticleTest extends TestCase
 
     public function testShouldDeleteArticle()
     {
+        $this->actingAs(factory(App\Author::class)->create(), 'api');
+
         $article = factory(App\Article::class)->create();
 
         $this

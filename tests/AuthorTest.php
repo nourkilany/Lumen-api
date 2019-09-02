@@ -1,5 +1,7 @@
 <?php
 
+
+
 class AuthorTest extends TestCase
 {
     /**
@@ -7,6 +9,9 @@ class AuthorTest extends TestCase
      */
     public function testShouldReturnAllAuthors()
     {
+
+        $this->actingAs(factory(App\Author::class)->create(), 'api');
+
         factory(App\Author::class, 10)->create();
 
         $this
@@ -31,6 +36,7 @@ class AuthorTest extends TestCase
      */
     public function testShouldReturnAuthor()
     {
+        $this->actingAs(factory(App\Author::class)->create(), 'api');
         $author = factory(App\Author::class)->create();
         $this
             ->get("api/v1/authors/{$author->id}")
@@ -50,28 +56,9 @@ class AuthorTest extends TestCase
         $this->assertArrayHasKey('updated_at', $data['data']);
     }
 
-    /**
-     * /authors [POST]
-     */
-    public function testShouldCreateAuthor()
-    {
-        $body = [
-            'name' => 'Nour',
-            'email' => 'nour@email.com',
-            'github' => 'nour@github.com',
-            'twitter' => 'Kiks',
-            'location' => 'Alexandria'
-        ];
-
-        $this
-            ->post('/api/v1/authors', $body)
-            ->seeStatusCode(201)
-            ->seeJson(['email' => $body['email']])
-            ->seeInDatabase('authors', ['email' => $body['email']]);
-    }
-
     public function testShouldUpdateAuthor()
     {
+        $this->actingAs(factory(App\Author::class)->create(), 'api');
         $author = factory(App\Author::class)->create();
         $body = [
             'name' => 'Hassan',
@@ -90,6 +77,7 @@ class AuthorTest extends TestCase
 
     public function testShouldDeleteAuthor()
     {
+        $this->actingAs(factory(App\Author::class)->create(), 'api');
         $author = factory(App\Author::class)->create();
 
         $this
