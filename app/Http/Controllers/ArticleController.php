@@ -37,7 +37,6 @@ class ArticleController extends Controller
      */
     public function index()
     {
-
         $paginator = Article::with('author')->paginate(5);
 
         $response =  $this->articleService->fractalizeAll($paginator, new ArticleTransformer);
@@ -93,12 +92,15 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'subject' => 'required|string',
-            'secondary_title' => 'required|string',
-            'body' => 'required|string',
-            'image' => 'image',
-        ]);
+        $this->validate(
+            $request,
+            [
+                'subject' => 'required|string',
+                'secondary_title' => 'required|string',
+                'body' => 'required|string',
+                'image' => 'image',
+            ]
+        );
 
         $article = $this->articleService->createArticle($request);
 
@@ -136,12 +138,16 @@ class ArticleController extends Controller
     {
         $article = Article::findOrFail($id);
 
-        $validatedArticle = $this->validate($request, [
-            'subject' => 'required|string',
-            'secondary_title' => 'required|string',
-            'body' => 'required|string',
-            'image' => 'nullable',
-        ]);
+        $validatedArticle = $this->validate(
+            $request,
+            [
+                'subject' => 'required|string',
+                'secondary_title' => 'required|string',
+                'body' => 'required|string',
+                'image' => 'nullable',
+            ]
+        );
+        //TODO: image upload
 
         $article->update($validatedArticle);
 

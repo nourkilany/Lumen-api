@@ -8,10 +8,14 @@ use Illuminate\Http\Request;
 use App\Transformers\AuthorTransformer;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * Class AuthorController
+ *
+ * @package App\Http\ControllersA
+ */
 class AuthorController extends Controller
 {
     protected $authorService;
-
     /**
      * Create a new controller instance.
      *
@@ -45,9 +49,9 @@ class AuthorController extends Controller
     }
 
     /**
+     *     summary="Get single authors",
      * @OA\Get(
      *     path="/api/v1/authors/{id}",
-     *     summary="Get single authors",
      *     operationId="getSingleAuthor",
      *     @OA\Parameter(
      *         description="ID of author to return",

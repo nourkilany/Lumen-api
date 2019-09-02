@@ -1,0 +1,11 @@
+- swagger params
+- image upload
+- array override
+- model -> perPage -> pagination
+- model -> with -> load relation everytime
+- string max number
+- check Koel
+- mutators
+- super and subtype
+- test annotations
+- factory->raw()
