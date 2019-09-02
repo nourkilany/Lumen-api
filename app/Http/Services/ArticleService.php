@@ -4,6 +4,7 @@ namespace App\Http\Services;
 
 use App\Author;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class ArticleService extends BaseService
 {
@@ -11,8 +12,7 @@ class ArticleService extends BaseService
   {
     $imagePath = $this->uploadImage($request['image']);
 
-    //TODO Get logged in user id instead of this
-    $author = Author::first();
+    $author = Auth::user();
 
     $article = $author->articles()->create([
       'subject' => $request['subject'],
@@ -30,10 +30,24 @@ class ArticleService extends BaseService
   {
     $imageName = $image->getClientOriginalName();
 
-    $imageName = Carbon::now() . $imageName;
+    $imageName = uniqid() . $imageName;
 
-    $image->move('uploads', $imageName);
+    $path = 'uploads/';
+
+    $destinationPath = $this->public_path($path);
+
+    $image->move($destinationPath, $imageName);
 
     return 'uploads/' . $imageName;
+  }
+
+  /**
+   * Helper function to get application base path
+   * The same function is available in laravel
+   * But not lumen.
+   */
+  private function public_path($path = null)
+  {
+    return rtrim(app()->basePath('public/' . $path), '/');
   }
 }

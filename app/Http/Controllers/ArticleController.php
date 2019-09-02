@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Article;
-use App\Author;
 use Illuminate\Http\Request;
 use App\Http\Services\ArticleService;
 use App\Transformers\ArticleTransformer;
@@ -39,7 +38,7 @@ class ArticleController extends Controller
     public function index()
     {
 
-        $paginator = Article::with('author')->paginate(2);
+        $paginator = Article::with('author')->paginate(5);
 
         $response =  $this->articleService->fractalizeAll($paginator, new ArticleTransformer);
 
