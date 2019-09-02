@@ -53,13 +53,6 @@ class AuthController extends Controller
   /**
    * @OA\Post(
    *     path="/api/v1/authors",
-   *     @OA\Parameter(
-   *         name="name",
-   *         in="query",
-   *         description="Author's name",
-   *         required=true,
-   *         @OA\Schema(type="string")
-   *     ),
    *     @OA\RequestBody(
    *         description="Author object that needs to be added authors",
    *         required=true,

@@ -76,23 +76,23 @@ class AuthorController extends Controller
     }
 
     /**
-     * @OA\Post(
-     *     path="/api/v1/authors",
+     * @OA\Put(
+     *     path="/api/v1/authors/{id}",
      *     @OA\Parameter(
-     *         name="name",
+     *         name="id",
      *         in="query",
-     *         description="Author's name",
+     *         description="Author to be updated id",
      *         required=true,
      *         @OA\Schema(type="string")
      *     ),
      *     @OA\RequestBody(
-     *         description="Author object that needs to be added authors",
+     *         description="Author object that needs to be updated",
      *         required=true,
      *         @OA\JsonContent(),
      *     ),
      *     @OA\Response(
-     *         response="201",
-     *         description="Creates an author",
+     *         response="200",
+     *         description="Updates an author",
      *         @OA\JsonContent()
      *     ),
      * )
@@ -117,12 +117,12 @@ class AuthorController extends Controller
     }
 
     /**
-     * @OA\Post(
-     *     path="/api/v1/authors",
+     * @OA\Delete(
+     *     path="/api/v1/authors/{id}",
      *     @OA\Parameter(
-     *         name="name",
+     *         name="id",
      *         in="query",
-     *         description="Author's name",
+     *         description="Author's id",
      *         required=true,
      *         @OA\Schema(type="string")
      *     ),
@@ -132,8 +132,8 @@ class AuthorController extends Controller
      *         @OA\JsonContent(),
      *     ),
      *     @OA\Response(
-     *         response="201",
-     *         description="Creates an author",
+     *         response="200",
+     *         description="Deletes an author",
      *         @OA\JsonContent()
      *     ),
      * )

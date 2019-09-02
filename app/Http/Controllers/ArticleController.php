@@ -78,14 +78,7 @@ class ArticleController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/api/v1/authors",
-     *     @OA\Parameter(
-     *         name="name",
-     *         in="query",
-     *         description="Author's name",
-     *         required=true,
-     *         @OA\Schema(type="string")
-     *     ),
+     *     path="/api/v1/articles",
      *     @OA\RequestBody(
      *         description="Author object that needs to be added authors",
      *         required=true,
@@ -115,17 +108,20 @@ class ArticleController extends Controller
     }
 
     /**
-     * @OA\Post(
-     *     path="/api/v1/authors",
+     * @OA\Put(
+     *     path="/api/v1/articles/{id}",
      *     @OA\Parameter(
-     *         name="name",
-     *         in="query",
-     *         description="Author's name",
+     *         description="ID of article to be updated",
+     *         in="path",
+     *         name="articleId",
      *         required=true,
-     *         @OA\Schema(type="string")
+     *         @OA\Schema(
+     *           type="integer",
+     *           format="int64"
+     *         )
      *     ),
      *     @OA\RequestBody(
-     *         description="Author object that needs to be added authors",
+     *         description="Article object that needs to be updated",
      *         required=true,
      *         @OA\JsonContent(),
      *     ),
@@ -155,14 +151,17 @@ class ArticleController extends Controller
     }
 
     /**
-     * @OA\Post(
-     *     path="/api/v1/authors",
+     * @OA\Delete(
+     *     path="/api/v1/articles/{id}",
      *     @OA\Parameter(
-     *         name="name",
-     *         in="query",
-     *         description="Author's name",
+     *         description="ID of article to delete",
+     *         in="path",
+     *         name="articleId",
      *         required=true,
-     *         @OA\Schema(type="string")
+     *         @OA\Schema(
+     *           type="integer",
+     *           format="int64"
+     *         )
      *     ),
      *     @OA\RequestBody(
      *         description="Author object that needs to be added authors",

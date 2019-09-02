@@ -9,6 +9,140 @@
         "version": "1.0"
     },
     "paths": {
+        "/api/v1/articles": {
+            "get": {
+                "summary": "Get articles",
+                "operationId": "getArticles",
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "operationId": "App\\Http\\Controllers\\ArticleController::store",
+                "requestBody": {
+                    "description": "Author object that needs to be added authors",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Creates an author",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/articles/{id}": {
+            "get": {
+                "summary": "Get single article",
+                "operationId": "getSingleArticle",
+                "parameters": [
+                    {
+                        "name": "authorId",
+                        "in": "path",
+                        "description": "ID of article to return",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Returns a specific article's data",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "operationId": "App\\Http\\Controllers\\ArticleController::update",
+                "parameters": [
+                    {
+                        "name": "articleId",
+                        "in": "path",
+                        "description": "ID of article to be updated",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Article object that needs to be updated",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Creates an author",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "operationId": "App\\Http\\Controllers\\ArticleController::destroy",
+                "parameters": [
+                    {
+                        "name": "articleId",
+                        "in": "path",
+                        "description": "ID of article to delete",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Author object that needs to be added authors",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Creates an author",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/v1/authors": {
             "get": {
                 "summary": "Get authors",
@@ -25,18 +159,7 @@
                 }
             },
             "post": {
-                "operationId": "App\\Http\\Controllers\\AuthorController::create",
-                "parameters": [
-                    {
-                        "name": "name",
-                        "in": "query",
-                        "description": "Author's name",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
+                "operationId": "App\\Http\\Controllers\\AuthController::register",
                 "requestBody": {
                     "description": "Author object that needs to be added authors",
                     "required": true,
@@ -77,6 +200,72 @@
                 "responses": {
                     "200": {
                         "description": "Returns a specific author's data",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "operationId": "App\\Http\\Controllers\\AuthorController::update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Author to be updated id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Author object that needs to be updated",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Updates an author",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "operationId": "App\\Http\\Controllers\\AuthorController::destroy",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Author's id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Author object that needs to be added authors",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Deletes an author",
                         "content": {
                             "application/json": {
                                 "schema": {}
