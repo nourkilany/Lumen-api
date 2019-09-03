@@ -1,11 +1,11 @@
-- swagger params
-- image upload
-- array override in model
-- model -> perPage -> pagination
-- model -> with -> load relation everytime
-- string max number
-- check Koel
-- mutators
-- super and subtype
-- test annotation instead of writing the word test at each test method
-- factory->raw() to get you the data instead of actually creating a user with these data
+[x] swagger params 
+[-] image upload
+[-] array override in model
+[-] model -> perPage -> pagination
+[-] model -> with -> load relation everytime
+[-] string max number
+[-] check Koel
+[-] mutators
+[-] super and subtype
+[-] test annotation instead of writing the word test at each test method
+[-] factory->raw() to get you the data instead of actually creating a user with these data
