@@ -29,8 +29,8 @@ class Author extends Model implements JWTSubject, AuthenticatableContract, Autho
   protected $hidden = [
     'password',
   ];
-
-  public function articles()
+  
+    public function articles()
   {
     return $this->hasMany('App\Article');
   }

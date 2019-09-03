@@ -8,6 +8,11 @@ use App\Http\Services\ArticleService;
 use App\Transformers\ArticleTransformer;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * @group Articles
+ *
+ * APIs for managing articles
+ */
 class ArticleController extends Controller
 {
     protected $articleService;
@@ -23,18 +28,11 @@ class ArticleController extends Controller
     }
 
     /**
-     * @OA\Get(
-     *     path="/api/v1/articles",
-     *     summary="Get articles",
-     *     operationId="getArticles",
-     *     @OA\Response(
-     *         response="default",
-     *         description="successful operation",
-     *         response="200",
-     *         @OA\JsonContent()
-     *     ),
-     * )
-     */
+    * Gets all articles
+    * @authenticated
+    * @transformer \App\Transformers\ArticleTransformer
+    * @transformerModel \App\Article
+    */
     public function index()
     {
         $paginator = Article::with('author')->paginate(5);
@@ -45,27 +43,11 @@ class ArticleController extends Controller
     }
 
     /**
-     * @OA\Get(
-     *     path="/api/v1/articles/{id}",
-     *     summary="Get single article",
-     *     operationId="getSingleArticle",
-     *     @OA\Parameter(
-     *         description="ID of article to return",
-     *         in="path",
-     *         name="authorId",
-     *         required=true,
-     *         @OA\Schema(
-     *           type="integer",
-     *           format="int64"
-     *         )
-     *     ),
-     *     @OA\Response(
-     *         response="200",
-     *         description="Returns a specific article's data",
-     *         @OA\JsonContent()
-     *     ),
-     * )
-     */
+    * Gets a single article
+    * @authenticated
+    * @transformer \App\Transformers\ArticleTransformer
+    * @transformerModel \App\Article
+    */
     public function show($id)
     {
         $article = Article::findOrFail($id);
@@ -75,21 +57,20 @@ class ArticleController extends Controller
         return response()->json($response, Response::HTTP_OK);
     }
 
+
     /**
-     * @OA\Post(
-     *     path="/api/v1/articles",
-     *     @OA\RequestBody(
-     *         description="Author object that needs to be added authors",
-     *         required=true,
-     *         @OA\JsonContent(),
-     *     ),
-     *     @OA\Response(
-     *         response="201",
-     *         description="Creates an author",
-     *         @OA\JsonContent()
-     *     ),
-     * )
-     */
+    * Creates an article
+    *
+    * @authenticated
+    *
+    * @transformer \App\Transformers\ArticleTransformer
+    * @transformerModel \App\Article
+    *
+    * @bodyParam subject string required The title of the article.
+    * @bodyParam secondary_title string required The secondary title of the article.
+    * @bodyParam body string required The body of the article.
+    * @bodyParam image file required an image to the article.
+    */
     public function store(Request $request)
     {
         $this->validate(
@@ -109,31 +90,20 @@ class ArticleController extends Controller
         return response()->json($response, Response::HTTP_CREATED);
     }
 
+
     /**
-     * @OA\Put(
-     *     path="/api/v1/articles/{id}",
-     *     @OA\Parameter(
-     *         description="ID of article to be updated",
-     *         in="path",
-     *         name="articleId",
-     *         required=true,
-     *         @OA\Schema(
-     *           type="integer",
-     *           format="int64"
-     *         )
-     *     ),
-     *     @OA\RequestBody(
-     *         description="Article object that needs to be updated",
-     *         required=true,
-     *         @OA\JsonContent(),
-     *     ),
-     *     @OA\Response(
-     *         response="201",
-     *         description="Creates an author",
-     *         @OA\JsonContent()
-     *     ),
-     * )
-     */
+    * Updates an existing article
+    *
+    * @authenticated
+    *
+    * @transformer \App\Transformers\ArticleTransformer
+    * @transformerModel \App\Article
+    *
+    * @bodyParam subject string required The title of the article.
+    * @bodyParam secondary_title string required The secondary title of the article.
+    * @bodyParam body string required The body of the article.
+    * @bodyParam image file required an image to the article.
+    */
     public function update(Request $request, $id)
     {
         $article = Article::findOrFail($id);
@@ -157,36 +127,17 @@ class ArticleController extends Controller
     }
 
     /**
-     * @OA\Delete(
-     *     path="/api/v1/articles/{id}",
-     *     @OA\Parameter(
-     *         description="ID of article to delete",
-     *         in="path",
-     *         name="articleId",
-     *         required=true,
-     *         @OA\Schema(
-     *           type="integer",
-     *           format="int64"
-     *         )
-     *     ),
-     *     @OA\RequestBody(
-     *         description="Author object that needs to be added authors",
-     *         required=true,
-     *         @OA\JsonContent(),
-     *     ),
-     *     @OA\Response(
-     *         response="201",
-     *         description="Creates an author",
-     *         @OA\JsonContent()
-     *     ),
-     * )
-     */
+    * Deletes a single articles
+    * @authenticated
+    * @transformer \App\Transformers\ArticleTransformer
+    * @transformerModel \App\Article
+    */
     public function destroy($id)
     {
         $article = Article::findOrFail($id);
 
         $article->delete();
 
-        return response()->json(null, Response::HTTP_OK);
+        return response()->json(['message' => 'Article was deleted successfully'], Response::HTTP_OK);
     }
 }

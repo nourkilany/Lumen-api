@@ -9,13 +9,14 @@ use App\Transformers\AuthorTransformer;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Class AuthorController
+ * @group Author
  *
- * @package App\Http\ControllersA
+ * APIs for managing authors
  */
 class AuthorController extends Controller
 {
     protected $authorService;
+
     /**
      * Create a new controller instance.
      *
@@ -27,17 +28,10 @@ class AuthorController extends Controller
     }
 
     /**
-     * @OA\Get(
-     *     path="/api/v1/authors",
-     *     summary="Get authors",
-     *     operationId="getAuthors",
-     *     @OA\Response(
-     *         response="default",
-     *         description="successful operation",
-     *         response="200",
-     *         @OA\JsonContent()
-     *     ),
-     * )
+     * Gets all authors
+     * @authenticated
+     * @transformer \App\Transformers\AuthorTransformer
+     * @transformerModel \App\Author
      */
     public function index()
     {
@@ -49,26 +43,10 @@ class AuthorController extends Controller
     }
 
     /**
-     *     summary="Get single authors",
-     * @OA\Get(
-     *     path="/api/v1/authors/{id}",
-     *     operationId="getSingleAuthor",
-     *     @OA\Parameter(
-     *         description="ID of author to return",
-     *         in="path",
-     *         name="authorId",
-     *         required=true,
-     *         @OA\Schema(
-     *           type="integer",
-     *           format="int64"
-     *         )
-     *     ),
-     *     @OA\Response(
-     *         response="200",
-     *         description="Returns a specific author's data",
-     *         @OA\JsonContent()
-     *     ),
-     * )
+     * Show a single author
+     * @authenticated
+     * @transformer \App\Transformers\AuthorTransformer
+     * @transformerModel \App\Author
      */
     public function show($id)
     {
@@ -80,38 +58,33 @@ class AuthorController extends Controller
     }
 
     /**
-     * @OA\Put(
-     *     path="/api/v1/authors/{id}",
-     *     @OA\Parameter(
-     *         name="id",
-     *         in="query",
-     *         description="Author to be updated id",
-     *         required=true,
-     *         @OA\Schema(type="string")
-     *     ),
-     *     @OA\RequestBody(
-     *         description="Author object that needs to be updated",
-     *         required=true,
-     *         @OA\JsonContent(),
-     *     ),
-     *     @OA\Response(
-     *         response="200",
-     *         description="Updates an author",
-     *         @OA\JsonContent()
-     *     ),
-     * )
-     */
+    * Updates an existing author
+    *
+    * @authenticated
+    *
+    * @transformer \App\Transformers\AuthorTransformer
+    * @transformerModel \App\Author
+    *
+    * @bodyParam name string required The name of the author.
+    * @bodyParam email string required The email of the author.
+    * @bodyParam github string required The github account of the author.
+    * @bodyParam twitter string required The twitter handle of the author.
+    * @bodyParam location string required The Address of the author.
+    */
     public function update(Request $request, $id)
     {
         $author = Author::findOrFail($id);
 
-        $validatedAuthor = $this->validate($request, [
-            'name' => 'required|string',
-            'email' => 'required|email',
-            'github' => 'required|email',
-            'twitter' => 'required|string',
-            'location' => 'required|string'
-        ]);
+        $validatedAuthor = $this->validate(
+            $request,
+            [
+                'name' => 'required|string',
+                'email' => 'required|email',
+                'github' => 'required|email',
+                'twitter' => 'required|string',
+                'location' => 'required|string'
+            ]
+        );
 
         $author->update($validatedAuthor);
 
@@ -121,26 +94,15 @@ class AuthorController extends Controller
     }
 
     /**
-     * @OA\Delete(
-     *     path="/api/v1/authors/{id}",
-     *     @OA\Parameter(
-     *         name="id",
-     *         in="query",
-     *         description="Author's id",
-     *         required=true,
-     *         @OA\Schema(type="string")
-     *     ),
-     *     @OA\RequestBody(
-     *         description="Author object that needs to be added authors",
-     *         required=true,
-     *         @OA\JsonContent(),
-     *     ),
-     *     @OA\Response(
-     *         response="200",
-     *         description="Deletes an author",
-     *         @OA\JsonContent()
-     *     ),
-     * )
+     * Deletes an author account
+     *
+     * @response 200 {
+     *  "message": "Author was deleted successfully"
+     * }
+     *
+     * @response 404 {
+     *  "message": "Not found"
+     * }
      */
     public function destroy($id)
     {
@@ -148,6 +110,6 @@ class AuthorController extends Controller
 
         $author->delete();
 
-        return response()->json(null, Response::HTTP_OK);
+        return response()->json(['message'=>'Author was deleted successfully'], Response::HTTP_OK);
     }
 }

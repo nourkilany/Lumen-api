@@ -26,6 +26,7 @@ $app->withFacades(true, ['Spatie\Fractal\FractalFacade' => 'Fractal']);
 $app->withEloquent();
 
 $app->configure('swagger-lume');
+$app->configure('apidoc');
 /*
 |--------------------------------------------------------------------------
 | Register Container Bindings
@@ -76,11 +77,12 @@ $app->routeMiddleware([
 | totally optional, so you are not required to uncomment this line.
 |
 */
-$app->register(Spatie\Fractal\FractalServiceProvider::class);
 $app->register(\SwaggerLume\ServiceProvider::class);
-$app->register(\Tymon\JWTAuth\Providers\LumenServiceProvider::class);
-// $app->register(App\Providers\AppServiceProvider::class);
 $app->register(App\Providers\AuthServiceProvider::class);
+$app->register(Spatie\Fractal\FractalServiceProvider::class);
+$app->register(\Tymon\JWTAuth\Providers\LumenServiceProvider::class);
+$app->register(\Mpociot\ApiDoc\ApiDocGeneratorServiceProvider::class);
+// $app->register(App\Providers\AppServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
 
 /*
