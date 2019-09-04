@@ -133,7 +133,7 @@ fetch(url, {
 ```bash
 curl -X POST "/api/v1/articles" \
     -H "Content-Type: application/json" \
-    -d '{"subject":"consequatur","secondary_title":"sint","body":"qui","image":"consequatur"}'
+    -d '{"subject":"tempora","secondary_title":"quia","body":"quae","image":"voluptas"}'
 
 ```
 
@@ -146,10 +146,10 @@ let headers = {
 }
 
 let body = {
-    "subject": "consequatur",
-    "secondary_title": "sint",
-    "body": "qui",
-    "image": "consequatur"
+    "subject": "tempora",
+    "secondary_title": "quia",
+    "body": "quae",
+    "image": "voluptas"
 }
 
 fetch(url, {
@@ -202,7 +202,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X PUT "/api/v1/articles/1" \
     -H "Content-Type: application/json" \
-    -d '{"subject":"magni","secondary_title":"harum","body":"sed","image":"quaerat"}'
+    -d '{"subject":"fuga","secondary_title":"doloribus","body":"voluptatem","image":"assumenda"}'
 
 ```
 
@@ -215,10 +215,10 @@ let headers = {
 }
 
 let body = {
-    "subject": "magni",
-    "secondary_title": "harum",
-    "body": "sed",
-    "image": "quaerat"
+    "subject": "fuga",
+    "secondary_title": "doloribus",
+    "body": "voluptatem",
+    "image": "assumenda"
 }
 
 fetch(url, {
@@ -356,7 +356,7 @@ fetch(url, {
 ```bash
 curl -X POST "/api/v1/auth/register" \
     -H "Content-Type: application/json" \
-    -d '{"name":"ex","email":"deserunt","github":"ut","twitter":"perspiciatis","location":"ipsa","password":"doloribus"}'
+    -d '{"name":"qui","email":"sint","github":"in","twitter":"laudantium","location":"deleniti","password":"quibusdam"}'
 
 ```
 
@@ -369,12 +369,12 @@ let headers = {
 }
 
 let body = {
-    "name": "ex",
-    "email": "deserunt",
-    "github": "ut",
-    "twitter": "perspiciatis",
-    "location": "ipsa",
-    "password": "doloribus"
+    "name": "qui",
+    "email": "sint",
+    "github": "in",
+    "twitter": "laudantium",
+    "location": "deleniti",
+    "password": "quibusdam"
 }
 
 fetch(url, {
@@ -536,7 +536,7 @@ fetch(url, {
 ```bash
 curl -X PUT "/api/v1/authors/1" \
     -H "Content-Type: application/json" \
-    -d '{"name":"dolor","email":"atque","github":"alias","twitter":"et","location":"praesentium"}'
+    -d '{"name":"facilis","email":"magni","github":"dicta","twitter":"laudantium","location":"sunt"}'
 
 ```
 
@@ -549,11 +549,11 @@ let headers = {
 }
 
 let body = {
-    "name": "dolor",
-    "email": "atque",
-    "github": "alias",
-    "twitter": "et",
-    "location": "praesentium"
+    "name": "facilis",
+    "email": "magni",
+    "github": "dicta",
+    "twitter": "laudantium",
+    "location": "sunt"
 }
 
 fetch(url, {
