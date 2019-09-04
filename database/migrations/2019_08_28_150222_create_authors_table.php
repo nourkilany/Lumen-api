@@ -15,12 +15,12 @@ class CreateAuthorsTable extends Migration
     {
         Schema::create('authors', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->string('github');
-            $table->string('twitter');
+            $table->string('name', 48);
+            $table->string('email', 48)->unique();
+            $table->string('github', 48);
+            $table->string('twitter', 48);
             $table->string('password');
-            $table->string('location');
+            $table->string('location', 48);
             $table->string('latest_article_published')->nullable();
             $table->timestamps();
         });

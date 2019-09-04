@@ -59,14 +59,10 @@ class ArticleTest extends TestCase
     {
         $this->actingAs(factory(App\Author::class)->create(), 'api');
 
-        factory(App\Author::class)->create();
-
-        $body = [
-            'subject' => 'A subject',
-            'secondary_title' => 'secondary title to the article',
-            'body' => 'this is a body to the article',
-            'image' => UploadedFile::fake()->image('avatar.jpg'),
-        ];
+        $body = factory('App\Article')->raw();
+        $body['image'] = UploadedFile::fake()->image('avatar.jpg');
+        
+        
 
         $this
             ->post('/api/v1/articles', $body)
